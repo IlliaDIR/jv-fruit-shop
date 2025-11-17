@@ -14,17 +14,25 @@ public class DataConverterImpl implements DataConverter {
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> report) {
         List<FruitTransaction> transactionsList = new ArrayList<>();
-        for (String s : report) {
-            if (s.equals(HEADER)) {
-                continue;
+        try {
+            for (String s : report) {
+                if (s.equals(HEADER)) {
+                    continue;
+                }
+                String[] split = s.split(",");
+                String operation = split[OPERATION_INDEX];
+                String fruit = split[FRUIT_INDEX];
+                int quantity = Integer.parseInt(split[QUANTITY_INDEX]);
+                FruitTransaction transaction = new FruitTransaction(operation,
+                        fruit, quantity);
+                transactionsList.add(transaction);
             }
-            String[] split = s.split(",");
-            String operation = split[OPERATION_INDEX];
-            String fruit = split[FRUIT_INDEX];
-            int quantity = Integer.parseInt(split[QUANTITY_INDEX]);
-            FruitTransaction transaction = new FruitTransaction(operation,
-                    fruit, quantity);
-            transactionsList.add(transaction);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new RuntimeException("Wrong text format, unable to parse the string." +
+                    "Check input file.", e);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Wrong number format, unable to parse. " +
+                    "Check input file." , e);
         }
         return transactionsList;
     }

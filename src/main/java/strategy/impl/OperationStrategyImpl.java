@@ -17,7 +17,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     public OperationHandler get(FruitTransaction.Operation operation) {
         OperationHandler operationType = operationHandlers.get(operation);
         if (operationType != null) {
-            return operationHandlers.get(operation);
+            return operationType;
         }
         throw new RuntimeException("Unknown type of operation: " + operation);
     }
