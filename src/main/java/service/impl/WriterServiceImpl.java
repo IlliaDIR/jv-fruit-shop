@@ -11,6 +11,9 @@ public class WriterServiceImpl implements WriterService {
         if (report == null) {
             throw new NullPointerException("The report is null. Unable to write.");
         }
+        if (path == null) {
+            throw new NullPointerException("The path is null. Unable to write.");
+        }
         if (!report.isEmpty()) {
             try {
                 Files.write(Path.of(path), report.getBytes());

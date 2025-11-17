@@ -14,6 +14,9 @@ public class DataConverterImpl implements DataConverter {
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> report) {
         List<FruitTransaction> transactionsList = new ArrayList<>();
+        if (report == null) {
+            throw new NullPointerException("The report can't be null.");
+        }
         try {
             for (String s : report) {
                 if (s.equals(HEADER)) {
