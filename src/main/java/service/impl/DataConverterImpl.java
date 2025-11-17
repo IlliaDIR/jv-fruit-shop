@@ -28,11 +28,11 @@ public class DataConverterImpl implements DataConverter {
                 transactionsList.add(transaction);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new RuntimeException("Wrong text format, unable to parse the string." +
-                    "Check input file.", e);
+            throw new RuntimeException("Wrong text format, unable to parse the string."
+                    + "Check input file.", e);
         } catch (NumberFormatException e) {
-            throw new RuntimeException("Wrong number format, unable to parse. " +
-                    "Check input file." , e);
+            throw new RuntimeException("Wrong number format, unable to parse. "
+                    + "Check input file.", e);
         }
         return transactionsList;
     }
