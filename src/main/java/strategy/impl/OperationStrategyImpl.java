@@ -10,6 +10,10 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     public OperationStrategyImpl(Map<FruitTransaction.Operation,
             OperationHandler> operationHandlers) {
+        if (operationHandlers == null) {
+            throw new NullPointerException("The Map " + operationHandlers
+                    + "is null. Can't be assigned as a field.");
+        }
         this.operationHandlers = operationHandlers;
     }
 

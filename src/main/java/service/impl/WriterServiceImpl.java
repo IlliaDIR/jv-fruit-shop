@@ -8,6 +8,9 @@ import service.WriterService;
 public class WriterServiceImpl implements WriterService {
     @Override
     public void writeToFile(String path, String report) {
+        if (report == null) {
+            throw new NullPointerException("The report is null. Unable to write.");
+        }
         if (!report.isEmpty()) {
             try {
                 Files.write(Path.of(path), report.getBytes());

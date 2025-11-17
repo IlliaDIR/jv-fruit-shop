@@ -8,6 +8,9 @@ public class FruitTransaction {
     private final int quantity;
 
     public FruitTransaction(String code, String fruit, int quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity can't be negative.");
+        }
         this.operation = Operation.fromCode(code);
         this.fruit = fruit;
         this.quantity = quantity;
