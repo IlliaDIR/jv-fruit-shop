@@ -16,11 +16,11 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public void process(List<FruitTransaction> transactions) {
         if (transactions == null) {
-            throw new NullPointerException("The transaction list can't be null.");
+            throw new IllegalArgumentException("The transaction list can't be null.");
         }
         for (FruitTransaction transaction : transactions) {
             if (transaction == null) {
-                throw new NullPointerException("Transaction is null, can't be processed.");
+                throw new RuntimeException("Transaction is null, can't be processed.");
             }
             OperationHandler handler = operationStrategy.get(transaction.getOperation());
             handler.apply(transaction);

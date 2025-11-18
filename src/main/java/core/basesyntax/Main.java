@@ -26,9 +26,12 @@ import strategy.impl.SupplyOperation;
  * Feel free to remove this class and create your own.
  */
 public class Main {
+    private static final String READ_FROM_PATH = "src/main/resources/transactions.csv";
+    private static final String WRITE_TO_PATH = "src/main/resources/report.csv";
+
     public static void main(String[] args) {
         ReaderService reader = new ReaderServiceImpl();
-        List<String> transactionsList = reader.readFromFile("src/main/resources/transactions.csv");
+        List<String> transactionsList = reader.readFromFile(READ_FROM_PATH);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
@@ -47,6 +50,6 @@ public class Main {
         String report = reportGenerator.getReport();
 
         WriterService writerService = new WriterServiceImpl();
-        writerService.writeToFile("src/main/resources/report.csv", report);
+        writerService.writeToFile(WRITE_TO_PATH, report);
     }
 }

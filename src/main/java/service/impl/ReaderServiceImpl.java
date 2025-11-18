@@ -10,7 +10,7 @@ public class ReaderServiceImpl implements ReaderService {
     @Override
     public List<String> readFromFile(String path) {
         if (path == null) {
-            throw new NullPointerException("Path can't be null.");
+            throw new IllegalArgumentException("Path can't be null. Provided path - " + path);
         }
         try {
             return Files.readAllLines(Path.of(path));

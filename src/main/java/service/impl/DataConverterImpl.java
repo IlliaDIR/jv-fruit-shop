@@ -9,20 +9,22 @@ public class DataConverterImpl implements DataConverter {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    private static final String COMMA = ",";
     private static final String HEADER = "type,fruit,quantity";
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> report) {
         List<FruitTransaction> transactionsList = new ArrayList<>();
         if (report == null) {
-            throw new NullPointerException("The report can't be null.");
+            throw new IllegalArgumentException("Provided report is null."
+                    + " Can't be processed.");
         }
         try {
-            for (String s : report) {
-                if (s.equals(HEADER)) {
+            for (String line : report) {
+                if (line.equals(HEADER)) {
                     continue;
                 }
-                String[] split = s.split(",");
+                String[] split = line.split(COMMA);
                 String operation = split[OPERATION_INDEX];
                 String fruit = split[FRUIT_INDEX];
                 int quantity = Integer.parseInt(split[QUANTITY_INDEX]);
